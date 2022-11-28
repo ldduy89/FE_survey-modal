@@ -3,8 +3,8 @@
   "function" == typeof define && define.amd
     ? define(n)
     : "object" == typeof exports
-    ? (module.exports = n(require, exports, module))
-    : (e.ouibounce = n());
+      ? (module.exports = n(require, exports, module))
+      : (e.ouibounce = n());
 })(this, function (e, n, o) {
   return function (e, n) {
     "use strict";
@@ -19,8 +19,8 @@
     function t() {
       s() ||
         (L.addEventListener("mouseleave", u),
-        L.addEventListener("mouseenter", r),
-        L.addEventListener("keydown", c));
+          L.addEventListener("mouseenter", r),
+          L.addEventListener("keydown", c));
     }
     function u(e) {
       e.clientY > k || (D = setTimeout(m, y));
@@ -57,7 +57,7 @@
       "undefined" != typeof n.cookieExpire && (b = i(n.cookieExpire)),
         n.sitewide === !0 && (w = ";path=/"),
         "undefined" != typeof n.cookieDomain &&
-          (x = ";domain=" + n.cookieDomain),
+        (x = ";domain=" + n.cookieDomain),
         "undefined" != typeof n.cookieName && (T = n.cookieName),
         (document.cookie = T + "=true" + b + x + w),
         L.removeEventListener("mouseleave", u),
@@ -69,7 +69,7 @@
       k = o(l.sensitivity, 20),
       p = o(l.timer, 1e3),
       y = o(l.delay, 0),
-      E = l.callback || function () {},
+      E = l.callback || function () { },
       b = i(l.cookieExpire) || "",
       x = l.cookieDomain ? ";domain=" + l.cookieDomain : "",
       T = l.cookieName ? l.cookieName : "viewedOuibounceModal",
@@ -89,7 +89,6 @@ var _ouibounce = ouibounce(document.getElementById("ouibounce-modal"), {
   timer: 0,
   callback: function () {
     _ouibounce.disable();
-    console.log("ouibounce fired!");
     var url_location = "";
     if (document.URL.slice(-1) == "/")
       url_location = document.URL + "dipstick_survey_start";
@@ -110,27 +109,23 @@ $("#ouibounce-modal .modal").on("click", function (e) {
 // =====================Show modal in mobile=========================
 $(document).ready(function () {
   var visitedUrlKey = "visitedUrl";
-  console.log({ visitedUrlKey });
   if (mobileCheck()) {
     var visitedUrl = getCookie(visitedUrlKey);
     var surveyCookie = getCookie("sfa_survey");
-    console.log(surveyCookie);
     if (visitedUrl.length > 0) {
       if (visitedUrl != window.location.href && !surveyCookie) {
         setTimeout(function () {
-          console.log("show popup");
           _ouibounce.fire();
         }, 10000);
       }
     } else {
-      console.log("first page visit: " + window.location.href);
       createSessionCookie(visitedUrlKey, window.location.href);
     }
   }
 });
 
 window.mobileCheck = function () {
-  let check = false;
+  var check = false;
   (function (a) {
     if (
       /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
@@ -150,11 +145,11 @@ function createSessionCookie(name, value) {
 }
 
 function getCookie(cname) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(";");
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
     while (c.charAt(0) == " ") {
       c = c.substring(1);
     }
@@ -178,20 +173,20 @@ $(".text-area textarea").keydown(function () {
 });
 
 $("input[type='radio']").on("click", function (e) {
-  const { name, value } = e.target;
+  var { name, value } = e.target;
   if (name == "who_you_are" && value == "food") {
     $(".group-food").show();
   } else {
     $(".group-food").hide();
   }
 
-  if (name == "complete_your_task" && value == "Yes with some difficulty") {
+  if (name == "completed_your_task" && value == "Yes with some difficulty") {
     $(".group-complete-yes").show();
   } else {
     $(".group-complete-yes").hide();
   }
 
-  if (name == "complete_your_task" && value == "No") {
+  if (name == "completed_your_task" && value == "No") {
     $(".group-complete-no").show();
   } else {
     $(".group-complete-no").hide();
@@ -216,7 +211,6 @@ function nextPrev(n) {
     return x;
   }, {});
   var errors = null;
-  if (!n) handelTab5(false);
   switch (currentTab) {
     case 0:
       errors = handelTab1(values);
@@ -231,7 +225,7 @@ function nextPrev(n) {
       errors = handelTab4(values);
       break;
     case 4:
-      errors = handelTab5(true);
+      errors = handelTab5(!!n);
       break;
     case 5:
       errors = handelTab6(values);
@@ -263,15 +257,15 @@ function handelTab1(values) {
       .forEach((key) => {
         if (key == "wya_food_other") {
           if (values["wya_food_order_input"] != "")
-            arrFoods.push("food orders - " + values["wya_food_order_input"]);
+            arrFoods.push("food others - " + values["wya_food_order_input"]);
         } else if (key != "wya_food_order_input") {
           arrFoods.push("food " + values[key]);
         }
       });
     if (arrFoods.length > 0) selectedJob = arrFoods.join(" | ");
-  } else if (values.who_you_are == "orders") {
+  } else if (values.who_you_are == "others") {
     if (values.wya_order_input != "")
-      selectedJob = "orders - " + values.wya_order_input;
+      selectedJob = "others - " + values.wya_order_input;
   } else {
     selectedJob = values.who_you_are;
   }
@@ -290,7 +284,7 @@ function handelTab2(values) {
     .forEach((key) => {
       if (key == "rfv_others") {
         if (values["rfv_others_input"] != "")
-          arrRfv.push("orders - " + values["rfv_others_input"]);
+          arrRfv.push("others - " + values["rfv_others_input"]);
       } else if (key != "rfv_others_input") {
         arrRfv.push(values[key]);
       }
@@ -302,31 +296,31 @@ function handelTab2(values) {
 }
 
 function handelTab3(values) {
-  var complete_your_task = values.complete_your_task;
+  var completed_your_task = values.completed_your_task;
   var challenges_faced = "";
   var arrRfv = [];
-  if (complete_your_task == "Yes with some difficulty") {
+  if (completed_your_task == "Yes with some difficulty") {
     Object.keys(values)
       .filter((key) => key.includes("yes_challenges_faced_"))
       .forEach((key) => {
         if (key == "yes_challenges_faced_others") {
           if (values["yes_challenges_faced_others_input"] != "")
             arrRfv.push(
-              "orders - " + values["yes_challenges_faced_others_input"]
+              "others - " + values["yes_challenges_faced_others_input"]
             );
         } else if (key != "yes_challenges_faced_others_input") {
           arrRfv.push(values[key]);
         }
       });
     challenges_faced = arrRfv.join(" | ");
-  } else if (complete_your_task == "No") {
+  } else if (completed_your_task == "No") {
     Object.keys(values)
       .filter((key) => key.includes("no_challenges_faced_"))
       .forEach((key) => {
         if (key == "no_challenges_faced_others") {
           if (values["no_challenges_faced_others_input"] != "")
             arrRfv.push(
-              "orders - " + values["no_challenges_faced_others_input"]
+              "others - " + values["no_challenges_faced_others_input"]
             );
         } else if (key != "no_challenges_faced_others_input") {
           arrRfv.push(values[key]);
@@ -334,30 +328,29 @@ function handelTab3(values) {
       });
     challenges_faced = arrRfv.join(" | ");
   }
-  
+
   if (
-    !complete_your_task ||
-    (["Yes with some difficulty", "No"].includes(complete_your_task) &&
+    !completed_your_task ||
+    (["Yes with some difficulty", "No"].includes(completed_your_task) &&
       challenges_faced == "")
   ) {
     return "Please select the options.";
   }
-
-  gtag("event", "dipstick_survey_step3", {
-    completed_your_task: complete_your_task,
-    challenges_faced: challenges_faced,
-  });
+  var body = { completed_your_task }
+  if (challenges_faced && challenges_faced != '') body.challenges_faced = challenges_faced
+  gtag("event", "dipstick_survey_step3", body);
 }
 
 function handelTab4(values) {
-  var satisfaction_availability_rating =
-    values.satisfaction_availability_rating;
-  var satisfaction_navigation_rating = values.satisfaction_navigation_rating;
-  var satisfaction_design_rating = values.satisfaction_design_rating;
-  var relative_availability_rating = values.relative_availability_rating;
-  var relative_navigation_rating = values.relative_navigation_rating;
-  var relative_design_rating = values.relative_design_rating;
-  var feedback_rating = values.feedback_rating;
+  var {
+    satisfaction_availability_rating,
+    satisfaction_navigation_rating,
+    satisfaction_design_rating,
+    relative_availability_rating,
+    relative_navigation_rating,
+    relative_design_rating,
+    feedback_rating
+  } = values
   if (
     !satisfaction_availability_rating ||
     !satisfaction_navigation_rating ||
@@ -368,20 +361,21 @@ function handelTab4(values) {
   ) {
     return "Please select the options.";
   }
-  gtag("event", "dipstick_survey_step4", {
-    satisfaction_availability_rating: satisfaction_availability_rating,
-    satisfaction_navigation_rating: satisfaction_navigation_rating,
-    satisfaction_design_rating: satisfaction_design_rating,
-    relative_availability_rating: relative_availability_rating,
-    relative_navigation_rating: relative_navigation_rating,
-    relative_design_rating: relative_design_rating,
-    feedback: feedback_rating,
-  });
+  var body = {
+    satisfaction_availability_rating,
+    satisfaction_navigation_rating,
+    satisfaction_design_rating,
+    relative_availability_rating,
+    relative_navigation_rating,
+    relative_design_rating,
+  }
+  if (feedback_rating && feedback_rating != '') body.feedback = feedback_rating
+  gtag("event", "dipstick_survey_step4", body);
 }
 
 function handelTab5(participate_in_survey) {
   gtag("event", "dipstick_survey_step5", {
-    participate_in_survey: participate_in_survey,
+    participate_in_survey: participate_in_survey ? 'yes' : 'no',
   });
   if (!participate_in_survey) {
     closeModal();
@@ -393,7 +387,7 @@ function handelTab6(values) {
   if (sfa_email == '') {
     return "Please enter your email.";
   }
-  if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(sfa_email)){
+  if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(sfa_email)) {
     return "Email invalid.";
   }
 
@@ -406,7 +400,7 @@ function handelTab6(values) {
   if (sfa_prototype) bodyLineArr.push(`- ${sfa_prototype}`);
   sfa_name = sfa_name && sfa_name !== "" ? `<${sfa_name}>` : "";
 
-  location.href = `mailto:sfawebsitesurvey@sfa.gov.sg=SFA Survey Response (${token})&body=${bodyLineArr.join(
+  location.href = `mailto:sfawebsitesurvey@sfa.gov.sg?subject=SFA Survey Response (${token})&body=${bodyLineArr.join(
     "%0A"
   )}`;
   var url_location = "";
