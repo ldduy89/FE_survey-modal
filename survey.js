@@ -407,10 +407,11 @@ function handelTab6(values) {
   if (document.URL.slice(-1) == "/")
     url_location = document.URL + "dipstick_survey_complete";
   else url_location = document.URL + "/dipstick_survey_complete";
-  var random = (Math.random() + 1).toString(36).substring(7);
-  gtag("event", "page_view", {
-    page_title: "dipstick survey complete",
-    page_location: url_location,
+  gtag('set', 'user_properties', {
     survey_token: token,
+  });
+  gtag('event', 'page_view', {
+    page_title: 'dipstick survey complete',
+    page_location: url_location,
   });
 }
