@@ -51,6 +51,12 @@
   font-weight: 600;
   /* margin-bottom: 25px; */
 }
+#ouibounce-modal h4 {
+  font-size: 18px;
+  margin: 0px;
+  font-weight: 600;
+  /* margin-bottom: 25px; */
+}
 #ouibounce-modal .errors {
   display: flex;
   color: red;
@@ -266,23 +272,31 @@
   font-size: 12px;
 }
 
-#ouibounce-modal .ma-top-0 {
+#ouibounce-modal .mt0 {
   margin-top: 0px;
 }
 
-#ouibounce-modal .ma-top-24 {
+#ouibounce-modal .mt24 {
   margin-top: 24px;
 }
 
-#ouibounce-modal .ma-bot-0 {
+#ouibounce-modal .mr24 {
+  margin-right: 24px;
+}
+
+#ouibounce-modal .mb0 {
   margin-bottom: 0;
 }
 
-#ouibounce-modal .ma-bot-32 {
+#ouibounce-modal .mb32 {
   margin-bottom: 32;
 }
-#ouibounce-modal .ma-bot-24 {
+#ouibounce-modal .mb24 {
   margin-bottom: 24;
+}
+
+#ouibounce-modal .dflex {
+  display: flex;
 }
 
 #ouibounce-modal .text-area{
