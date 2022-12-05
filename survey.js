@@ -115,7 +115,7 @@ $(document).ready(function () {
         }, 10000);
       }
     } else {
-      document.cookie = name + "=" + value + "; path=/";
+      document.cookie = name + "=" + window.location.href + "; path=/";
     }
   }
 });
