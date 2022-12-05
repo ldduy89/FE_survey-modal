@@ -36,11 +36,7 @@
       return a()[e] === n;
     }
     function a() {
-      for (
-        var e = document.cookie.split("; "), n = {}, o = e.length - 1;
-        o >= 0;
-        o--
-      ) {
+      for (var e = document?.cookie?.split("; ") || [], n = {}, o = e.length - 1; o >= 0; o--) {
         var i = e[o].split("=");
         n[i[0]] = i[1];
       }
@@ -119,7 +115,7 @@ $(document).ready(function () {
         }, 10000);
       }
     } else {
-      createSessionCookie(visitedUrlKey, window.location.href);
+      document.cookie = name + "=" + value + "; path=/";
     }
   }
 });
@@ -139,10 +135,6 @@ window.mobileCheck = function () {
   })(navigator.userAgent || navigator.vendor || window.opera);
   return check;
 };
-
-function createSessionCookie(name, value) {
-  document.cookie = name + "=" + value + "; path=/";
-}
 
 function getCookie(cname) {
   var name = cname + "=";
