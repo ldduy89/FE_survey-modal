@@ -116,7 +116,13 @@ $(document).ready(function () {
         }, 10000);
       }
     } else {
-      document.cookie = visitedUrlKey + "=" + window.location.href + "; path=/";
+      var href = window.location.pathname;
+      if(href.includes(".html")){
+        href = href.replace(".html", "");         
+      }
+      if(/^[a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|(^\/{1,2})/.test(href)){
+        document.cookie = visitedUrlKey + "=" + href + "; path=/";
+      }
     }
   }
 });
