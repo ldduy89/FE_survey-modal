@@ -12,9 +12,8 @@
       return "undefined" == typeof e ? n : e;
     }
     function i(e) {
-      var n = 24 * e * 60 * 60 * 1e3,
-        o = new Date();
-      return o.setTime(o.getTime() + n), "; expires=" + o.toUTCString();
+      var n = 24 * e * 60 * 60 * 1e3, o = new Date(new Date().getTime() + n);
+      return "; expires=" + o.toUTCString();
     }
     function t() {
       s() ||
@@ -82,7 +81,7 @@
 var _ouibounce = ouibounce(document.getElementById("ouibounce-modal"), {
   aggressive: false,
   cookieName: "sfa_survey",
-  cookieExpire: new Date().getTime() + 1000 * 60 * 60 * 24,
+  cookieExpire: 1,
   timer: 0,
   callback: function () {
     _ouibounce.disable();
@@ -121,7 +120,11 @@ $(document).ready(function () {
         href = href.replace(".html", "");         
       }
       if(/^[a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|(^\/{1,2})/.test(href)){
-        document.cookie = visitedUrlKey + "=" + href + "; path=/";
+        var now = new Date();
+        var time = now.getTime();
+        var expireTime = time + 1000 * 60 * 60 * 24;
+        now.setTime(expireTime);
+        document.cookie = visitedUrlKey + "=" + href + "; path=/" + "; expires=" + now.toUTCString() + ";"
       }
     }
   }
