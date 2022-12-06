@@ -36,9 +36,10 @@
       return a()[e] === n;
     }
     function a() {
-      for (var e = document?.cookie?.split("; ") || [], n = {}, o = e.length - 1; o >= 0; o--) {
-        var i = e[o].split("=");
-        n[i[0]] = i[1];
+      var e = document?.cookie?.split("; ") || [], n = {};
+      for (var o = e.length - 1; o >= 0; o--) {
+        var i = e[o]?.split("=");
+        if(i) n[i[0]] = i[1];
       }
       return n;
     }
