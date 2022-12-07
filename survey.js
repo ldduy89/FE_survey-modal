@@ -97,8 +97,6 @@ var _ouibounce = ouibounce(document.getElementById("ouibounce-modal"), {
   },
 });
 
-// _ouibounce.fire();
-
 $("#ouibounce-modal .modal").on("click", function (e) {
   e.stopPropagation();
 });
@@ -409,11 +407,8 @@ function handelTab6(values) {
   if (sfa_name == '') return "Please enter your name.";
   if (sfa_email == '') return "Please enter your email.";
   if (!sfa_interviews && !sfa_prototype) return "Please select the options.";
+  if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(sfa_email)) return "Email invalid.";
   
-  if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(sfa_email)) {
-    return "Email invalid.";
-  }
-
   var random = (Math.random() + 1).toString(36).substring(7);
   var token = "token_" + random + "_" + new Date().getTime();
   var bodyLineArr = [];
