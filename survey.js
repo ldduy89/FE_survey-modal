@@ -253,27 +253,35 @@ function nextPrev(n) {
 
 function handelTab1(values) {
   var selectedJob;
+  var errors;
   if (values.who_you_are == "food") {
     var arrFoods = [];
     Object.keys(values)
       .filter((key) => key.includes("wya_food_"))
       .forEach((key) => {
         if (key == "wya_food_other") {
-          if (values["wya_food_order_input"] != "")
+          if (values["wya_food_order_input"] != "") {
             arrFoods.push("food others - " + values["wya_food_order_input"]);
+          } else {
+            errors = "Please input your answer “Others” (Please specify) textbox";
+          }
         } else if (key != "wya_food_order_input") {
           arrFoods.push("food " + values[key]);
         }
       });
     if (arrFoods.length > 0) selectedJob = arrFoods.join(" | ");
   } else if (values.who_you_are == "others") {
-    if (values.wya_order_input != "")
+    if (values.wya_order_input != "") {
       selectedJob = "others - " + values.wya_order_input;
+    } else {
+      errors = "Please input your answer “Others” (Please specify) textbox";
+    }
+
   } else {
     selectedJob = values.who_you_are;
   }
-
-  if (!selectedJob) return "Please select the options.";
+  if (!selectedJob && !errors) errors = "Please select the options.";
+  if (errors) return errors
   gtag("set", "user_properties", {
     who_you_are: selectedJob,
   });
@@ -282,17 +290,21 @@ function handelTab1(values) {
 
 function handelTab2(values) {
   var arrRfv = [];
+  var errors;
   Object.keys(values)
     .filter((key) => key.includes("rfv_"))
     .forEach((key) => {
       if (key == "rfv_others") {
         if (values["rfv_others_input"] != "")
           arrRfv.push("others - " + values["rfv_others_input"]);
+        else
+          errors = "Please input your answer “Others” (Please specify) textbox";
       } else if (key != "rfv_others_input") {
         arrRfv.push(values[key]);
       }
     });
-  if (arrRfv.length == 0) return "Please select the options.";
+  if (arrRfv.length == 0 && !errors) errors = "Please select the options.";
+  if (errors) return errors
   gtag("event", "dipstick_survey_step2", {
     reason_for_visit: arrRfv.join(" | "),
   });
@@ -302,6 +314,7 @@ function handelTab3(values) {
   var completed_your_task = values.completed_your_task;
   var challenges_faced = "";
   var arrRfv = [];
+  var errors;
   if (completed_your_task == "Yes with some difficulty") {
     Object.keys(values)
       .filter((key) => key.includes("yes_challenges_faced_"))
@@ -311,6 +324,8 @@ function handelTab3(values) {
             arrRfv.push(
               "others - " + values["yes_challenges_faced_others_input"]
             );
+          else
+            errors = "Please input your answer “Others” (Please specify) textbox";
         } else if (key != "yes_challenges_faced_others_input") {
           arrRfv.push(values[key]);
         }
@@ -325,6 +340,8 @@ function handelTab3(values) {
             arrRfv.push(
               "others - " + values["no_challenges_faced_others_input"]
             );
+          else
+            errors = "Please input your answer “Others” (Please specify) textbox";
         } else if (key != "no_challenges_faced_others_input") {
           arrRfv.push(values[key]);
         }
@@ -335,12 +352,13 @@ function handelTab3(values) {
   if (
     !completed_your_task ||
     (["Yes with some difficulty", "No"].includes(completed_your_task) &&
-      challenges_faced == "")
+      challenges_faced == "" && !errors)
   ) {
-    return "Please select the options.";
+    errors = "Please select the options.";
   }
+  if (errors) return errors
   var body = { completed_your_task }
-  if (challenges_faced && challenges_faced != '') body.challenges_faced = challenges_faced
+  if (challenges_faced && challenges_faced != '') body.challenges_faced = challenges_faced;
   gtag("event", "dipstick_survey_step3", body);
 }
 
@@ -387,9 +405,11 @@ function handelTab5(participate_in_survey) {
 
 function handelTab6(values) {
   var { sfa_name, sfa_email, sfa_interviews, sfa_prototype } = values;
-  if (sfa_email == '') {
-    return "Please enter your email.";
-  }
+
+  if (sfa_name == '') return "Please enter your name.";
+  if (sfa_email == '') return "Please enter your email.";
+  if (!sfa_interviews && !sfa_prototype) return "Please select the options.";
+  
   if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(sfa_email)) {
     return "Email invalid.";
   }
@@ -401,7 +421,6 @@ function handelTab6(values) {
   if (sfa_email) bodyLineArr.push(`- Email: ${sfa_email}`);
   if (sfa_interviews) bodyLineArr.push(`- ${sfa_interviews}`);
   if (sfa_prototype) bodyLineArr.push(`- ${sfa_prototype}`);
-  sfa_name = sfa_name && sfa_name !== "" ? `<${sfa_name}>` : "";
 
   location.href = `mailto:sfawebsitesurvey@sfa.gov.sg?subject=SFA Survey Response (${token})&body=${bodyLineArr.join(
     "%0A"
