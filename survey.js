@@ -35,10 +35,11 @@
       return a()[e] === n;
     }
     function a() {
-      var e = document?.cookie?.split("; ") || [], n = {};
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var e = decodedCookie.split("; ") || [], n = {};
       for (var o = e.length - 1; o >= 0; o--) {
         var i = e[o]?.split("=");
-        if(i) n[i[0]] = i[1];
+        if (i) n[i[0]] = i[1];
       }
       return n;
     }
@@ -116,10 +117,10 @@ $(document).ready(function () {
       }
     } else {
       var href = window.location.pathname;
-      if(href.includes(".html")){
-        href = href.replace(".html", "");         
+      if (href.includes(".html")) {
+        href = href.replace(".html", "");
       }
-      if(/^[a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|(^\/{1,2})/.test(href)){
+      if (/^[a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|(^\/{1,2})/.test(href)) {
         var now = new Date();
         var time = now.getTime();
         var expireTime = time + 1000 * 60 * 60 * 24;
