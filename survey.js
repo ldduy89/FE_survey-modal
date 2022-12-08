@@ -1,3 +1,34 @@
+let _store = {
+  setWithExpiry: (key, value, ttl) => {
+    const now = new Date()
+
+    // `item` is an object which contains the original value
+    // as well as the time when it's supposed to expire
+    const item = {
+      value: value,
+      expiry: now.getTime() + ttl,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+  getWithExpiry: (key) => {
+    const itemStr = localStorage.getItem(key)
+    // if the item doesn't exist, return null
+    if (!itemStr) {
+      return null
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+    // compare the expiry time of the item with the current time
+    if (now.getTime() > item.expiry) {
+      // If the item is expired, delete the item from storage
+      // and return null
+      localStorage.removeItem(key)
+      return null
+    }
+    return item.value
+  }
+}
+
 // =====================Show modal in pc=========================
 !(function (e, n) {
   "function" == typeof define && define.amd
@@ -10,10 +41,6 @@
     "use strict";
     function o(e, n) {
       return "undefined" == typeof e ? n : e;
-    }
-    function i(e) {
-      var n = 24 * e * 60 * 60 * 1e3, o = new Date(new Date().getTime() + n);
-      return "; expires=" + o.toUTCString();
     }
     function t() {
       s() ||
@@ -32,32 +59,17 @@
         (e.metaKey && 76 === e.keyCode && ((g = !0), (D = setTimeout(m, y))));
     }
     function d(e, n) {
-      return a()[e] === n;
-    }
-    function a() {
-      var decodedCookie = decodeURIComponent(document.cookie);
-      var e = decodedCookie.split("; ") || [], n = {};
-      for (var o = e.length - 1; o >= 0; o--) {
-        var i = e[o]?.split("=");
-        if (i) n[i[0]] = i[1];
-      }
-      return n;
+      return _store.getWithExpiry(e) == n;
     }
     function s() {
-      return d(T, "true") && !v;
+      return d(T, true) && !v;
     }
     function m() {
       s() || (e && (e.style.display = "block"), E(), f());
     }
     function f(e) {
-      var n = e || {};
-      "undefined" != typeof n.cookieExpire && (b = i(n.cookieExpire)),
-        n.sitewide === !0 && (w = ";path=/"),
-        "undefined" != typeof n.cookieDomain &&
-        (x = ";domain=" + n.cookieDomain),
-        "undefined" != typeof n.cookieName && (T = n.cookieName),
-        (document.cookie = T + "=true" + b + x + w),
-        L.removeEventListener("mouseleave", u),
+      _store.setWithExpiry(T, true, n.storeExpire)
+      L.removeEventListener("mouseleave", u),
         L.removeEventListener("mouseenter", r),
         L.removeEventListener("keydown", c);
     }
@@ -67,10 +79,7 @@
       p = o(l.timer, 1e3),
       y = o(l.delay, 0),
       E = l.callback || function () { },
-      b = i(l.cookieExpire) || "",
-      x = l.cookieDomain ? ";domain=" + l.cookieDomain : "",
-      T = l.cookieName ? l.cookieName : "viewedOuibounceModal",
-      w = l.sitewide === !0 ? ";path=/" : "",
+      T = l.storeName ? l.storeName : "viewedOuibounceModal",
       D = null,
       L = document.documentElement;
     setTimeout(t, p);
@@ -81,8 +90,8 @@
 
 var _ouibounce = ouibounce(document.getElementById("ouibounce-modal"), {
   aggressive: false,
-  cookieName: "sfa_survey",
-  cookieExpire: 1,
+  storeName: "sfa_survey",
+  storeExpire: 24 * 60 * 60 * 1000,
   timer: 0,
   callback: function () {
     _ouibounce.disable();
@@ -102,28 +111,29 @@ $("#ouibounce-modal .modal").on("click", function (e) {
 });
 
 // =====================Show modal in mobile=========================
+
 $(document).ready(function () {
-  var visitedUrlKey = "visitedUrl";
+  let _config = {
+    'numberOfPageView' : 2,
+    'storageName' : '_mobile-exit-intent_page-view',
+    'ctaDelay' : 10000,
+    'ctaTimeout' : 24*60*60*1000
+  };
   if (mobileCheck()) {
-    var visitedUrl = getCookie(visitedUrlKey);
-    var surveyCookie = getCookie("sfa_survey");
-    if (visitedUrl.length > 0) {
-      if (visitedUrl != window.location.href && !surveyCookie) {
-        setTimeout(function () {
+     // Page view detection
+    let _pageView = +sessionStorage.getItem(_config['storageName']) || 0;
+    _pageView += 1;
+    console.log('sdfsdfsdfsdf');
+    sessionStorage.setItem(_config['storageName'], (+_pageView));
+    // Page view count exceed
+    if (_pageView >= _config['numberOfPageView']) {
+      // Session timeout check, local store check
+      if (!sessionStorage.getItem(_config['storageName'] + '_timeout') && !_store.getWithExpiry(_config['storageName'])) {
+        sessionStorage.setItem(_config['storageName'] + '_timeout', true);
+        setTimeout(() => {
+          _store.setWithExpiry(_config['storageName'], true, _config['ctaTimeout']);
           _ouibounce.fire();
-        }, 10000);
-      }
-    } else {
-      var href = window.location.pathname;
-      if (href.includes(".html")) {
-        href = href.replace(".html", "");
-      }
-      if (/^[a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|(^\/{1,2})/.test(href)) {
-        var now = new Date();
-        var time = now.getTime();
-        var expireTime = time + 1000 * 60 * 60 * 24;
-        now.setTime(expireTime);
-        document.cookie = visitedUrlKey + "=" + href + "; path=/" + "; expires=" + now.toUTCString() + ";"
+        }, _config['ctaDelay']);
       }
     }
   }
@@ -144,22 +154,6 @@ window.mobileCheck = function () {
   })(navigator.userAgent || navigator.vendor || window.opera);
   return check;
 };
-
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(";");
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == " ") {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
 
 // =====================Action in modal=========================
 
@@ -408,7 +402,7 @@ function handelTab6(values) {
   if (sfa_email == '') return "Please enter your email.";
   if (!sfa_interviews && !sfa_prototype) return "Please select the options.";
   if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(sfa_email)) return "Email invalid.";
-  
+
   var random = (Math.random() + 1).toString(36).substring(7);
   var token = "token_" + random + "_" + new Date().getTime();
   var bodyLineArr = [];
