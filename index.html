@@ -13,15 +13,14 @@
         gtag("js", new Date());
         gtag("config", "G-XK60CFCLQ8");
     </script>
-</head> 
+</head>
 
 <body>
-    <a href="/test">test</a>
+    <script src="jquery-lt.min.js"></script>
     <div id="ouibounce-modal">
         <div class="underlay"></div>
-        <div class="modal">
-            <form id="regForm">
-                <div class="modal-title">
+        <div class="ds-modal">
+                <div class="ds-modal-title">
                     <div class="close-x" onclick="closeModal()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
                             stroke="#ed500d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -31,53 +30,54 @@
                         </svg>
                     </div>
                 </div>
-                <div class="modal-body">
+                <div class="ds-modal-body">
                     <!-- ==============================================tab 1======================================================== -->
                     <div class="tab" style="display: none">
                         <h3>We welcome your feedback.</h3>
                         <span class="errors"></span>
-                        <h4 class="mt24">Help us improve your experience on the SFA website by doing a 5-minute survey.</h4>
+                        <h4 class="mt24">Help us improve your experience on the SFA website by doing a 5-minute survey.
+                        </h4>
                         <span class="mt24 dflex">Which of the following best describes you for your visit to
                             our
                             website today?</span>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="radio" name="who_you_are" value="food" />
                             <div class="checkmark radio"></div>
                             <span>I work in the agri-<b>food sector</b></span>
                         </label>
                         <div class="group-check group-food" style="display: none">
                             Check any that apply:
-                            <label class="container">
+                            <label class="ds-container">
                                 <input type="checkbox" name="wya_food_farmer" value="farmer" />
                                 <div class="checkmark check-box"></div>
                                 <span>Food Farmer</span>
                             </label>
-                            <label class="container">
+                            <label class="ds-container">
                                 <input type="checkbox" name="wya_food_trader" value="trader" />
                                 <div class="checkmark check-box"></div>
                                 <span>Food Trader (Importer/Exporter)</span>
                             </label>
-                            <label class="container">
+                            <label class="ds-container">
                                 <input type="checkbox" name="wya_food_retailer" value="retailer" />
                                 <div class="checkmark check-box"></div>
                                 <span>Food Retailer</span>
                             </label>
-                            <label class="container">
+                            <label class="ds-container">
                                 <input type="checkbox" name="wya_food_manufacturer" value="manufacturer" />
                                 <div class="checkmark check-box"></div>
                                 <span>Food Manufacturer</span>
                             </label>
-                            <label class="container">
+                            <label class="ds-container">
                                 <input type="checkbox" name="wya_food_other" value="other" />
                                 <div class="checkmark check-box"></div>
                                 <span>Others (please specify)</span>
                             </label>
-                            <label class="container" for="che1">
+                            <label class="ds-container" for="che1">
                                 <input type="text" placeholder="If “Others” please specify" maxlength="100"
                                     name="wya_food_order_input" />
                             </label>
                         </div>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="radio" name="who_you_are"
                                 value="regional / international body that regulates the food" />
                             <div class="checkmark radio"></div>
@@ -85,37 +85,37 @@
                                 <b>regional / international body that regulates the food industry
                                 </b></span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="radio" name="who_you_are" value="media" />
                             <div class="checkmark radio"></div>
                             <span>I work in the <b>media</b></span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="radio" name="who_you_are" value="researcher" />
                             <div class="checkmark radio"></div>
                             <span>I am a <b>researcher</b></span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="radio" name="who_you_are" value="educator" />
                             <div class="checkmark radio"></div>
                             <span>I am an <b>educator</b></span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="radio" name="who_you_are" value="singapore public servant" />
                             <div class="checkmark radio"></div>
                             <span>I am a <b>Singapore Public Servant</b></span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="radio" name="who_you_are" value="general public" />
                             <div class="checkmark radio"></div>
                             <span>I am a member of the <b>general public</b></span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="radio" name="who_you_are" value="tourist or traveller" />
                             <div class="checkmark radio"></div>
                             <span>I am a <b>tourist or traveller</b></span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="radio" name="who_you_are" value="others" />
                             <div class="checkmark radio"></div>
                             <span>Others (please specify)</span>
@@ -133,55 +133,55 @@
                             our
                             website today?</h4>
                         <span class="errors"></span>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="checkbox" name="rfv_learn" value="learn" />
                             <div class="checkmark check-box"></div>
                             <span>Learn about SFA</span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="checkbox" name="rfv_tools" value="tools" />
                             <div class="checkmark check-box"></div>
                             <span>Use tools and resources (e.g. calculator, forms,
                                 guides)</span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="checkbox" name="rfv_eservices" value="eservices" />
                             <div class="checkmark check-box"></div>
                             <span>Use eServices (e.g. apply/renew/make payment)</span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="checkbox" name="rfv_news" value="news" />
                             <div class="checkmark check-box"></div>
                             <span>Get the latest news related to the food industry</span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="checkbox" name="rfv_events" value="events" />
                             <div class="checkmark check-box"></div>
                             <span>Get the latest information on events related to the food
                                 industry</span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="checkbox" name="rfv_publications" value="publications" />
                             <div class="checkmark check-box"></div>
                             <span>Look for food-related publications (e.g. Singapore Food
                                 Statistics)</span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="checkbox" name="rfv_legislation" value="legislation" />
                             <div class="checkmark check-box"></div>
                             <span>Look for food-related legislation</span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="checkbox" name="rfv_feedback" value="feedback" />
                             <div class="checkmark check-box"></div>
                             <span>Contact SFA to give feedback / submit enquiry</span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="checkbox" name="rfv_others" value="others" />
                             <div class="checkmark check-box"></div>
                             <span>Others (please specify)</span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="text" placeholder="If “Others” please specify" name="rfv_others_input"
                                 maxlength="100" />
                         </label>
@@ -196,92 +196,93 @@
                             needed
                             today?</h4>
                         <span class="errors"></span>
-                        <label class="container">
+                        <label class="ds-container">
                             <div>
                                 <input type="radio" name="completed_your_task" value="Yes" />
                                 <div class="checkmark radio"></div>
                             </div>
                             <span>Yes</span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="radio" name="completed_your_task" value="Yes with some difficulty" />
                             <div class="checkmark radio"></div>
                             <span>Yes, but with some difficulty</span>
                         </label>
                         <div class="group-check group-complete-yes" style="display: none">
-                            <label class="container">
+                            <label class="ds-container">
                                 <input type="checkbox" name="yes_challenges_faced_navigation" value="navigation" />
                                 <div class="checkmark check-box"></div>
                                 <span>The website was difficult to navigate. I was unsure or did
                                     not know where to look for the information.</span>
                             </label>
-                            <label class="container">
+                            <label class="ds-container">
                                 <input type="checkbox" name="yes_challenges_faced_search" value="search" />
                                 <div class="checkmark check-box"></div>
                                 <span>The search function was not effective. The results were not
                                     relevant.</span>
                             </label>
-                            <label class="container">
-                                <input type="checkbox" name="yes_challenges_faced_understanding" value="understanding" />
+                            <label class="ds-container">
+                                <input type="checkbox" name="yes_challenges_faced_understanding"
+                                    value="understanding" />
                                 <div class="checkmark check-box"></div>
                                 <span>The information was not easy to understand.</span>
                             </label>
-                            <label class="container">
+                            <label class="ds-container">
                                 <input type="checkbox" name="yes_challenges_faced_updates" value="updates" />
                                 <div class="checkmark check-box"></div>
                                 <span>The information was not updated.</span>
                             </label>
-                            <label class="container">
+                            <label class="ds-container">
                                 <input type="checkbox" name="yes_challenges_faced_others" value="others" />
                                 <div class="checkmark check-box"></div>
                                 <span>Others (please specify)</span>
                             </label>
-                            <label class="container">
+                            <label class="ds-container">
                                 <input type="text" placeholder="If “Others” please specify"
                                     name="yes_challenges_faced_others_input" maxlength="100" />
                             </label>
                         </div>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="radio" name="completed_your_task" value="No" />
                             <div class="checkmark radio"></div>
                             <span>No</span>
                         </label>
                         <div class="group-check group-complete-no" style="display: none">
                             Please tell us why
-                            <label class="container">
+                            <label class="ds-container">
                                 <input type="checkbox" name="no_challenges_faced_details" value="details" />
                                 <div class="checkmark check-box"></div>
                                 <span>The information I needed was not available on the
                                     website.</span>
                             </label>
-                            <label class="container">
+                            <label class="ds-container">
                                 <input type="checkbox" name="no_challenges_faced_navigation" value="navigation" />
                                 <div class="checkmark check-box"></div>
                                 <span>The website was difficult to navigate. I was unsure or did
                                     not know where to look for the information.</span>
                             </label>
-                            <label class="container">
+                            <label class="ds-container">
                                 <input type="checkbox" name="no_challenges_faced_search" value="search" />
                                 <div class="checkmark check-box"></div>
                                 <span>The search function was not effective. The results were not
                                     relevant.</span>
                             </label>
-                            <label class="container">
+                            <label class="ds-container">
                                 <input type="checkbox" name="no_challenges_faced_understanding" value="understanding" />
                                 <div class="checkmark check-box"></div>
                                 <span>The information was not easy to understand.</span>
                             </label>
-                            <label class="container">
+                            <label class="ds-container">
                                 <input type="checkbox" name="no_challenges_faced_updates" value="updates" />
                                 <div class="checkmark check-box"></div>
                                 <span>The information was not updated.</span>
                             </label>
-                            <label class="container">
+                            <label class="ds-container">
                                 <input type="checkbox" name="no_challenges_faced_others" value="others" />
                                 <div class="checkmark check-box"></div>
                                 <span>Others (please specify)</span>
                             </label>
-                            <label class="container">
+                            <label class="ds-container">
                                 <input type="text" placeholder="If “Others” please specify"
                                     name="no_challenges_faced_others_input" />
                             </label>
@@ -297,7 +298,7 @@
                             website
                             journey today?</h4>
                         <span class="errors"></span>
-                        <label class="container box-radio mb0" for="che1">
+                        <label class="ds-container box-radio mb0" for="che1">
                             <span></span>
                             <div class="box">
                                 <label class="font-sz-10">Very dissatisfied</label>
@@ -309,7 +310,7 @@
                                 <label class="font-sz-10">Very satisfied</label>
                             </div>
                         </label>
-                        <label class="container box-radio mt0" for="che1">
+                        <label class="ds-container box-radio mt0" for="che1">
                             <span>Availability of Content / Information</span>
                             <div class="box">
                                 <label>
@@ -331,7 +332,7 @@
                                 </label>
                             </div>
                         </label>
-                        <label class="container box-radio" for="che1">
+                        <label class="ds-container box-radio" for="che1">
                             <span>Ease of Navigation</span>
                             <div class="box">
                                 <label>
@@ -353,7 +354,7 @@
                                 </label>
                             </div>
                         </label>
-                        <label class="container box-radio mb32" for="che1">
+                        <label class="ds-container box-radio mb32" for="che1">
                             <span>Visual Design</span>
                             <div class="box">
                                 <label>
@@ -377,7 +378,7 @@
                         </label>
                         How would you rate our website when compared to other government
                         websites?
-                        <label class="container box-radio mb0" for="che1">
+                        <label class="ds-container box-radio mb0" for="che1">
                             <span></span>
                             <div class="box">
                                 <label class="font-sz-10"> Very poor </label>
@@ -388,7 +389,7 @@
                                 <label class="font-sz-10">Very good </label>
                             </div>
                         </label>
-                        <label class="container box-radio mt0" for="che1">
+                        <label class="ds-container box-radio mt0" for="che1">
                             <span>Availability of Content / Information</span>
                             <div class="box">
                                 <label>
@@ -410,7 +411,7 @@
                                 </label>
                             </div>
                         </label>
-                        <label class="container box-radio" for="che1">
+                        <label class="ds-container box-radio" for="che1">
                             <span>Ease of Navigation</span>
                             <div class="box">
                                 <label>
@@ -432,7 +433,7 @@
                                 </label>
                             </div>
                         </label>
-                        <label class="container box-radio mb24" for="che1">
+                        <label class="ds-container box-radio mb24" for="che1">
                             <span>Visual Design</span>
                             <div class="box">
                                 <label>
@@ -455,7 +456,7 @@
                             </div>
                         </label>
                         Any other feedback or suggestions to improve our websites?
-                        <label class="container" for="che1">
+                        <label class="ds-container" for="che1">
                             <div class="text-area">
                                 <textarea id="w3review" rows="4" maxlength="100" style="width: 100%"
                                     name="feedback_rating"></textarea>
@@ -489,26 +490,26 @@
                         <h4 class="mr24">Which of the following activities would you be willing to
                             participate in?</h4>
                         <span class="errors"></span>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="checkbox" name="sfa_interviews"
                                 value="1-on-1 interviews or Focus Group Discussions" />
                             <div class="checkmark check-box"></div>
                             <span>1-on-1 interviews or Focus Group Discussions</span>
                         </label>
-                        <label class="container">
+                        <label class="ds-container">
                             <input type="checkbox" name="sfa_prototype" value="Website / Prototype usability testing" />
                             <div class="checkmark check-box"></div>
                             <span>Website / Prototype usability testing</span>
                         </label>
 
-                        <label class="container">
+                        <label class="ds-container">
                             <div style="width: 100%">
                                 <b>Name</b>
                                 <input type="text" placeholder="Enter name" maxlength="100" name="sfa_name" />
                             </div>
                         </label>
 
-                        <label class="container">
+                        <label class="ds-container">
                             <div style="width: 100%">
                                 <b>Email</b>
                                 <input type="text" placeholder="Enter email" maxlength="100" name="sfa_email" />
@@ -540,10 +541,8 @@
                         </button>
                     </div>
                 </div>
-
-                <div class="modal-footer">
+                <div class="ds-modal-footer">
                 </div>
-            </form>
         </div>
     </div>
     <script src="survey.js"></script>

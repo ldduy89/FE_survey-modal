@@ -10,7 +10,9 @@
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-animation: fadein 0.5s;
   animation: fadein 0.5s;
+  z-index: 1000;
 }
+
 #ouibounce-modal .underlay {
   width: 100%;
   height: 100%;
@@ -19,20 +21,37 @@
   left: 0;
   cursor: pointer;
 }
-#ouibounce-modal .modal {
+
+@media screen and (max-width: 566px) {
+  #ouibounce-modal *, 
+  #ouibounce-modal :after,
+  #ouibounce-modal :before {
+    -webkit-box-sizing: initial;
+    box-sizing: initial;
+  }
+}
+
+#ouibounce-modal .ds-modal {
   width: 566px;
   background-color: white;
-  z-index: 1;
+  z-index: 1000;
   position: relative;
   margin: auto;
-  top: 100;
+  top: 100px;
   border-radius: 4px;
   -webkit-animation: popin 0.3s;
   animation: popin 0.3s;
   margin-bottom: 170px;
 }
 
-#ouibounce-modal .modal-title {
+@media screen and (max-width: 566px) {
+  #ouibounce-modal .ds-modal {
+    width: 100%;
+    margin-bottom: 0px;
+  }
+}
+
+#ouibounce-modal .ds-modal-title {
   font-size: 18px;
   padding: 48px 24px 0px 24px;
   margin: 0;
@@ -40,11 +59,23 @@
   cursor: pointer;
 }
 
-#ouibounce-modal .close-x{
+#ouibounce-modal .close-x {
   position: absolute;
-  right: 24;
+  right: 24px;
   top: 50px;
+  width: 32px;
+  height: 32px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%23ed500d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
+  z-index: 1001;
 }
+
+@media screen and (max-width: 566px) {
+  #ouibounce-modal .close-x {
+    right: 15px;
+    top: 15px;
+  }
+}
+
 #ouibounce-modal h3 {
   font-size: 32px;
   margin: 0px;
@@ -67,12 +98,12 @@
   margin-top: 25px;
 }
 
-#ouibounce-modal .modal-body {
+#ouibounce-modal .ds-modal-body {
   padding: 0px 24px;
   font-size: 16px;
 }
 
-#ouibounce-modal .modal-item {
+#ouibounce-modal .ds-modal-item {
   display: flex;
   align-items: center;
 }
@@ -81,8 +112,8 @@
   color: #344a5f;
   line-height: 1.3em;
 }
-#ouibounce-modal form input[type="text"],
-#ouibounce-modal form textarea {
+#ouibounce-modal input[type="text"],
+#ouibounce-modal textarea {
   padding: 10px;
   font-size: 16px;
   width: 100%;
@@ -92,7 +123,7 @@
   resize: none;
 }
 
-#ouibounce-modal form input[type="submit"] {
+#ouibounce-modal input[type="submit"] {
   text-transform: uppercase;
   font-weight: bold;
   padding: 12px;
@@ -104,7 +135,7 @@
   cursor: pointer;
   -webkit-font-smoothing: antialiased;
 }
-#ouibounce-modal form p {
+#ouibounce-modal   p {
   text-align: left;
   margin-left: 35px;
   opacity: 0.8;
@@ -112,14 +143,14 @@
   padding-top: 1px;
   font-size: 0.9em;
 }
-#ouibounce-modal .modal-footer {
+#ouibounce-modal .ds-modal-footer {
   bottom: 20px;
   text-align: center;
   padding: 48px;
   padding-top: 0px;
 }
 
-#ouibounce-modal .modal-footer p {
+#ouibounce-modal .ds-modal-footer p {
   text-transform: capitalize;
   cursor: pointer;
   display: inline;
@@ -148,7 +179,7 @@
   background: white;
 }
 
-#ouibounce-modal .container {
+#ouibounce-modal .ds-container {
   line-height: 21px;
   display: flex;
   align-items: center;
@@ -162,7 +193,7 @@
   user-select: none;
 }
 
-#ouibounce-modal .container input {
+#ouibounce-modal .ds-container input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -202,7 +233,7 @@
   background-color: #ccc; 
 }
 
-#ouibounce-modal .container input:checked ~ .checkmark {
+#ouibounce-modal .ds-container input:checked ~ .checkmark {
   background-color: #ed500d;
   border: 1px solid #ed500d;
 }
@@ -213,11 +244,11 @@
   display: none;
 }
 
-#ouibounce-modal .container input:checked ~ .checkmark:after {
+#ouibounce-modal .ds-container input:checked ~ .checkmark:after {
   display: block;
 }
 
-#ouibounce-modal .container .radio:after {
+#ouibounce-modal .ds-container .radio:after {
   top: 7px;
   left: 7px;
   width: 8px;
@@ -226,7 +257,7 @@
   background: white;
 }
 
-#ouibounce-modal .container span {
+#ouibounce-modal .ds-container span {
   max-width: 90%;
   padding-left: 10px;
 }
@@ -251,7 +282,7 @@
   font-size: smaller;
 }
 
-#ouibounce-modal .container .check-box:after {
+#ouibounce-modal .ds-container .check-box:after {
   left: 6px;
   top: 1px;
   width: 7px;

@@ -123,7 +123,6 @@ $(document).ready(function () {
      // Page view detection
     let _pageView = +sessionStorage.getItem(_config['storageName']) || 0;
     _pageView += 1;
-    console.log('sdfsdfsdfsdf');
     sessionStorage.setItem(_config['storageName'], (+_pageView));
     // Page view count exceed
     if (_pageView >= _config['numberOfPageView']) {
@@ -200,30 +199,25 @@ function showTab(n) {
 }
 
 function nextPrev(n) {
-  var arrayObj = $("form").serializeArray();
-  var values = arrayObj?.reduce((x, y) => {
-    x[y.name] = y.value;
-    return x;
-  }, {});
   var errors = null;
   switch (currentTab) {
     case 0:
-      errors = handelTab1(values);
+      errors = handelTab1();
       break;
     case 1:
-      errors = handelTab2(values);
+      errors = handelTab2();
       break;
     case 2:
-      errors = handelTab3(values);
+      errors = handelTab3();
       break;
     case 3:
-      errors = handelTab4(values);
+      errors = handelTab4();
       break;
     case 4:
       errors = handelTab5(!!n);
       break;
     case 5:
-      errors = handelTab6(values);
+      errors = handelTab6();
       break;
     default:
       break;
@@ -243,34 +237,37 @@ function nextPrev(n) {
   showTab(currentTab);
 }
 
-function handelTab1(values) {
+function handelTab1() {
+  var who_you_are = $("input[type='radio']input[name='who_you_are']:checked")[0]?.value;
+  var wya_order_input = $("input[name='wya_order_input']")[0]?.value;;
+  var wya_foods = $("input[name*='wya_food_']:checked");
+  var wya_food_order_input = $("input[name='wya_food_order_input']")[0]?.value;
+  
   var selectedJob;
   var errors;
-  if (values.who_you_are == "food") {
+  if (who_you_are == "food") {
     var arrFoods = [];
-    Object.keys(values)
-      .filter((key) => key.includes("wya_food_"))
-      .forEach((key) => {
-        if (key == "wya_food_other") {
-          if (values["wya_food_order_input"] != "") {
-            arrFoods.push("food others - " + values["wya_food_order_input"]);
-          } else {
-            errors = "Please input your answer “Others” (Please specify) textbox";
-          }
-        } else if (key != "wya_food_order_input") {
-          arrFoods.push("food " + values[key]);
+    wya_foods.each(elm => {
+      if (wya_foods[elm].name == "wya_food_other") {
+        if (wya_food_order_input != "") {
+          arrFoods.push("food others - " + wya_food_order_input);
+        } else {
+          errors = "Please input your answer “Others” (Please specify) textbox";
         }
-      });
+      } else if (wya_foods[elm].name != "wya_food_order_input") {
+        arrFoods.push("food " + wya_foods[elm].value);
+      }
+    });
     if (arrFoods.length > 0) selectedJob = arrFoods.join(" | ");
-  } else if (values.who_you_are == "others") {
-    if (values.wya_order_input != "") {
-      selectedJob = "others - " + values.wya_order_input;
+  } else if (who_you_are == "others") {
+    if (wya_order_input != "") {
+      selectedJob = "others - " + wya_order_input;
     } else {
       errors = "Please input your answer “Others” (Please specify) textbox";
     }
 
   } else {
-    selectedJob = values.who_you_are;
+    selectedJob = who_you_are;
   }
   if (!selectedJob && !errors) errors = "Please select the options.";
   if (errors) return errors
@@ -280,19 +277,20 @@ function handelTab1(values) {
   gtag("event", "dipstick_survey_step1");
 }
 
-function handelTab2(values) {
+function handelTab2() {
+  var rfvs = $("input[name*='rfv_']:checked");
+  var rfv_others_input = $("input[name='rfv_others_input']")[0]?.value;
+
   var arrRfv = [];
   var errors;
-  Object.keys(values)
-    .filter((key) => key.includes("rfv_"))
-    .forEach((key) => {
-      if (key == "rfv_others") {
-        if (values["rfv_others_input"] != "")
-          arrRfv.push("others - " + values["rfv_others_input"]);
+  rfvs.each(elm => {
+      if (rfvs[elm].name == "rfv_others") {
+        if (rfv_others_input != "")
+          arrRfv.push("others - " + rfv_others_input);
         else
           errors = "Please input your answer “Others” (Please specify) textbox";
-      } else if (key != "rfv_others_input") {
-        arrRfv.push(values[key]);
+      } else if (rfvs[elm].name != "rfv_others_input") {
+        arrRfv.push(rfvs[elm].value);
       }
     });
   if (arrRfv.length == 0 && !errors) errors = "Please select the options.";
@@ -302,40 +300,41 @@ function handelTab2(values) {
   });
 }
 
-function handelTab3(values) {
-  var completed_your_task = values.completed_your_task;
+function handelTab3() {
+  var completed_your_task = $("input[type='radio']input[name='completed_your_task']:checked")[0]?.value;
+  var yes_challenges_faceds = $("input[name*='yes_challenges_faced_']:checked");
+  var no_challenges_faceds = $("input[name*='no_challenges_faced_']:checked");
+  var yes_challenges_faced_others_input = $("input[name='yes_challenges_faced_others_input']")[0]?.value;
+  var no_challenges_faced_others_input = $("input[name='no_challenges_faced_others_input']")[0]?.value;
+
   var challenges_faced = "";
   var arrRfv = [];
   var errors;
   if (completed_your_task == "Yes with some difficulty") {
-    Object.keys(values)
-      .filter((key) => key.includes("yes_challenges_faced_"))
-      .forEach((key) => {
-        if (key == "yes_challenges_faced_others") {
-          if (values["yes_challenges_faced_others_input"] != "")
+    yes_challenges_faceds.each(elm => {
+        if (yes_challenges_faceds[elm].name == "yes_challenges_faced_others") {
+          if (yes_challenges_faced_others_input != "")
             arrRfv.push(
-              "others - " + values["yes_challenges_faced_others_input"]
+              "others - " + yes_challenges_faced_others_input
             );
           else
             errors = "Please input your answer “Others” (Please specify) textbox";
-        } else if (key != "yes_challenges_faced_others_input") {
-          arrRfv.push(values[key]);
+        } else if (yes_challenges_faceds[elm].name != "yes_challenges_faced_others_input") {
+          arrRfv.push(yes_challenges_faceds[elm].value);
         }
       });
     challenges_faced = arrRfv.join(" | ");
   } else if (completed_your_task == "No") {
-    Object.keys(values)
-      .filter((key) => key.includes("no_challenges_faced_"))
-      .forEach((key) => {
-        if (key == "no_challenges_faced_others") {
-          if (values["no_challenges_faced_others_input"] != "")
+    no_challenges_faceds.each(elm => {
+        if (no_challenges_faceds[elm].name == "no_challenges_faced_others") {
+          if (no_challenges_faced_others_input != "")
             arrRfv.push(
-              "others - " + values["no_challenges_faced_others_input"]
+              "others - " + no_challenges_faced_others_input
             );
           else
             errors = "Please input your answer “Others” (Please specify) textbox";
-        } else if (key != "no_challenges_faced_others_input") {
-          arrRfv.push(values[key]);
+        } else if (no_challenges_faceds[elm].name != "no_challenges_faced_others_input") {
+          arrRfv.push(no_challenges_faceds[elm].value);
         }
       });
     challenges_faced = arrRfv.join(" | ");
@@ -354,16 +353,14 @@ function handelTab3(values) {
   gtag("event", "dipstick_survey_step3", body);
 }
 
-function handelTab4(values) {
-  var {
-    satisfaction_availability_rating,
-    satisfaction_navigation_rating,
-    satisfaction_design_rating,
-    relative_availability_rating,
-    relative_navigation_rating,
-    relative_design_rating,
-    feedback_rating
-  } = values
+function handelTab4() {
+  var satisfaction_availability_rating = $("input[type='radio']input[name='satisfaction_availability_rating']:checked")[0]?.value;
+  var satisfaction_navigation_rating = $("input[type='radio']input[name='satisfaction_navigation_rating']:checked")[0]?.value;
+  var satisfaction_design_rating = $("input[type='radio']input[name='satisfaction_design_rating']:checked")[0]?.value;
+  var relative_availability_rating = $("input[type='radio']input[name='relative_availability_rating']:checked")[0]?.value;
+  var relative_navigation_rating = $("input[type='radio']input[name='relative_navigation_rating']:checked")[0]?.value;
+  var relative_design_rating = $("input[type='radio']input[name='relative_design_rating']:checked")[0]?.value;
+  var feedback_rating = $("textarea[name='feedback_rating']")[0]?.value;
   if (
     !satisfaction_availability_rating ||
     !satisfaction_navigation_rating ||
@@ -395,8 +392,11 @@ function handelTab5(participate_in_survey) {
   }
 }
 
-function handelTab6(values) {
-  var { sfa_name, sfa_email, sfa_interviews, sfa_prototype } = values;
+function handelTab6() {
+  var sfa_name = $("input[name='sfa_name']")[0]?.value;
+  var sfa_email = $("input[name='sfa_email']")[0]?.value;
+  var sfa_interviews = $("input[name='sfa_interviews']:checked")[0]?.value;
+  var sfa_prototype = $("input[name='sfa_prototype']:checked")[0]?.value;
 
   if (sfa_name == '') return "Please enter your name.";
   if (sfa_email == '') return "Please enter your email.";
