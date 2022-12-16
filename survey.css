@@ -295,12 +295,15 @@
   position: relative;
 }
 
-#ouibounce-modal .font-sz-10 {
+#ouibounce-modal .fs10 {
   font-size: 10px;
 }
 
-#ouibounce-modal .font-sz-12 {
+#ouibounce-modal .fs12 {
   font-size: 12px;
+}
+#ouibounce-modal .fs15 {
+  font-size: 15px;
 }
 
 #ouibounce-modal .mt0 {
