@@ -4,15 +4,6 @@
 <head>
     <link rel="stylesheet" type="text/css" href="survey.css" />
     <script src="jquery-lt.min.js"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XK60CFCLQ8"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag("js", new Date());
-        gtag("config", "G-XK60CFCLQ8");
-    </script>
 </head>
 
 <body>
@@ -48,22 +39,22 @@
                         <div class="group-check group-food" style="display: none">
                             Check any that apply:
                             <label class="ds-container">
-                                <input type="checkbox" name="wya_food_farmer" value="farmer" />
+                                <input type="checkbox" name="wya_food_farmer" value="1" />
                                 <div class="checkmark check-box"></div>
                                 <span>Food Farmer</span>
                             </label>
                             <label class="ds-container">
-                                <input type="checkbox" name="wya_food_trader" value="trader" />
+                                <input type="checkbox" name="wya_food_trader" value="2" />
                                 <div class="checkmark check-box"></div>
                                 <span>Food Trader (Importer/Exporter)</span>
                             </label>
                             <label class="ds-container">
-                                <input type="checkbox" name="wya_food_retailer" value="retailer" />
+                                <input type="checkbox" name="wya_food_retailer" value="3" />
                                 <div class="checkmark check-box"></div>
                                 <span>Food Retailer</span>
                             </label>
                             <label class="ds-container">
-                                <input type="checkbox" name="wya_food_manufacturer" value="manufacturer" />
+                                <input type="checkbox" name="wya_food_manufacturer" value="4" />
                                 <div class="checkmark check-box"></div>
                                 <span>Food Manufacturer</span>
                             </label>
@@ -73,7 +64,7 @@
                                 <span>Others (please specify)</span>
                             </label>
                             <label class="ds-container" for="che1">
-                                <input type="text" placeholder="If “Others” please specify" maxlength="100"
+                                <input type="text" placeholder="If “Others” please specify" maxlength="70"
                                     name="wya_food_order_input" />
                             </label>
                         </div>
@@ -134,45 +125,45 @@
                             website today?</h4>
                         <span class="errors"></span>
                         <label class="ds-container">
-                            <input type="checkbox" name="rfv_learn" value="learn" />
+                            <input type="checkbox" name="rfv_learn" value="A" />
                             <div class="checkmark check-box"></div>
                             <span>Learn about SFA</span>
                         </label>
                         <label class="ds-container">
-                            <input type="checkbox" name="rfv_tools" value="tools" />
+                            <input type="checkbox" name="rfv_tools" value="B" />
                             <div class="checkmark check-box"></div>
                             <span>Use tools and resources (e.g. calculator, forms,
                                 guides)</span>
                         </label>
                         <label class="ds-container">
-                            <input type="checkbox" name="rfv_eservices" value="eservices" />
+                            <input type="checkbox" name="rfv_eservices" value="C" />
                             <div class="checkmark check-box"></div>
                             <span>Use eServices (e.g. apply/renew/make payment)</span>
                         </label>
                         <label class="ds-container">
-                            <input type="checkbox" name="rfv_news" value="news" />
+                            <input type="checkbox" name="rfv_news" value="D" />
                             <div class="checkmark check-box"></div>
                             <span>Get the latest news related to the food industry</span>
                         </label>
                         <label class="ds-container">
-                            <input type="checkbox" name="rfv_events" value="events" />
+                            <input type="checkbox" name="rfv_events" value="E" />
                             <div class="checkmark check-box"></div>
                             <span>Get the latest information on events related to the food
                                 industry</span>
                         </label>
                         <label class="ds-container">
-                            <input type="checkbox" name="rfv_publications" value="publications" />
+                            <input type="checkbox" name="rfv_publications" value="F" />
                             <div class="checkmark check-box"></div>
                             <span>Look for food-related publications (e.g. Singapore Food
                                 Statistics)</span>
                         </label>
                         <label class="ds-container">
-                            <input type="checkbox" name="rfv_legislation" value="legislation" />
+                            <input type="checkbox" name="rfv_legislation" value="G" />
                             <div class="checkmark check-box"></div>
                             <span>Look for food-related legislation</span>
                         </label>
                         <label class="ds-container">
-                            <input type="checkbox" name="rfv_feedback" value="feedback" />
+                            <input type="checkbox" name="rfv_feedback" value="H" />
                             <div class="checkmark check-box"></div>
                             <span>Contact SFA to give feedback / submit enquiry</span>
                         </label>
@@ -183,7 +174,7 @@
                         </label>
                         <label class="ds-container">
                             <input type="text" placeholder="If “Others” please specify" name="rfv_others_input"
-                                maxlength="100" />
+                                maxlength="70" />
                         </label>
                         <button class="footer-buttom orange" type="button" onclick="nextPrev(1)">
                             Next
@@ -210,25 +201,24 @@
                         </label>
                         <div class="group-check group-complete-yes" style="display: none">
                             <label class="ds-container">
-                                <input type="checkbox" name="yes_challenges_faced_navigation" value="navigation" />
+                                <input type="checkbox" name="yes_challenges_faced_navigation" value="1" />
                                 <div class="checkmark check-box"></div>
                                 <span>The website was difficult to navigate. I was unsure or did
                                     not know where to look for the information.</span>
                             </label>
                             <label class="ds-container">
-                                <input type="checkbox" name="yes_challenges_faced_search" value="search" />
+                                <input type="checkbox" name="yes_challenges_faced_search" value="2" />
                                 <div class="checkmark check-box"></div>
                                 <span>The search function was not effective. The results were not
                                     relevant.</span>
                             </label>
                             <label class="ds-container">
-                                <input type="checkbox" name="yes_challenges_faced_understanding"
-                                    value="understanding" />
+                                <input type="checkbox" name="yes_challenges_faced_understanding" value="3" />
                                 <div class="checkmark check-box"></div>
                                 <span>The information was not easy to understand.</span>
                             </label>
                             <label class="ds-container">
-                                <input type="checkbox" name="yes_challenges_faced_updates" value="updates" />
+                                <input type="checkbox" name="yes_challenges_faced_updates" value="4" />
                                 <div class="checkmark check-box"></div>
                                 <span>The information was not updated.</span>
                             </label>
@@ -239,7 +229,7 @@
                             </label>
                             <label class="ds-container">
                                 <input type="text" placeholder="If “Others” please specify"
-                                    name="yes_challenges_faced_others_input" maxlength="100" />
+                                    name="yes_challenges_faced_others_input" maxlength="70" />
                             </label>
                         </div>
                         <label class="ds-container">
@@ -250,30 +240,30 @@
                         <div class="group-check group-complete-no" style="display: none">
                             Please tell us why
                             <label class="ds-container">
-                                <input type="checkbox" name="no_challenges_faced_details" value="details" />
+                                <input type="checkbox" name="no_challenges_faced_details" value="1" />
                                 <div class="checkmark check-box"></div>
                                 <span>The information I needed was not available on the
                                     website.</span>
                             </label>
                             <label class="ds-container">
-                                <input type="checkbox" name="no_challenges_faced_navigation" value="navigation" />
+                                <input type="checkbox" name="no_challenges_faced_navigation" value="2" />
                                 <div class="checkmark check-box"></div>
                                 <span>The website was difficult to navigate. I was unsure or did
                                     not know where to look for the information.</span>
                             </label>
                             <label class="ds-container">
-                                <input type="checkbox" name="no_challenges_faced_search" value="search" />
+                                <input type="checkbox" name="no_challenges_faced_search" value="3" />
                                 <div class="checkmark check-box"></div>
                                 <span>The search function was not effective. The results were not
                                     relevant.</span>
                             </label>
                             <label class="ds-container">
-                                <input type="checkbox" name="no_challenges_faced_understanding" value="understanding" />
+                                <input type="checkbox" name="no_challenges_faced_understanding" value="4" />
                                 <div class="checkmark check-box"></div>
                                 <span>The information was not easy to understand.</span>
                             </label>
                             <label class="ds-container">
-                                <input type="checkbox" name="no_challenges_faced_updates" value="updates" />
+                                <input type="checkbox" name="no_challenges_faced_updates" value="5" />
                                 <div class="checkmark check-box"></div>
                                 <span>The information was not updated.</span>
                             </label>
@@ -283,8 +273,7 @@
                                 <span>Others (please specify)</span>
                             </label>
                             <label class="ds-container">
-                                <input type="text" placeholder="If “Others” please specify"
-                                    name="no_challenges_faced_others_input" />
+                                <input type="text" placeholder="If “Others” please specify" name="no_challenges_faced_others_input" maxlength="70" />
                             </label>
                         </div>
                         <button class="footer-buttom orange" type="button" onclick="nextPrev(1)">
@@ -520,7 +509,7 @@
                             purpose of making arrangements for the research session.</span>
 
                         <br /><br />
-                        <span class="fs12">be assured that any information shared will be used solely
+                        <span class="fs12">Please be assured that any information shared will be used solely
                             for the purpose of the SFA website research and accessible only to
                             SFA and Decision Science Agency. All personal information will be
                             duly destroyed in accordance with the prevailing PDPA legislation.</span>
@@ -533,9 +522,7 @@
                     <div class="tab" style="display: none">
                         <h3>Thank you!</h3>
                         <span class="errors"></span>
-                        <span class="mt24">We will reach out to you when you are selected for the
-                            usuability
-                            testing.</span>
+                        <span class="mt24">We will reach out to you if you are selected for the research session.</span>
                         <button class="footer-buttom while" type="button" onclick="closeModal()" style="margin-top: 16">
                             Close
                         </button>

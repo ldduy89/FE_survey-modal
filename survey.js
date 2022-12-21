@@ -148,14 +148,15 @@ window.mobileCheck = function () {
       /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(
         a.substr(0, 4)
       )
-    ) {
+    ){
       check = true;
     }
-    if (!check) {
+    if(!check){
       if (navigator.userAgent.match(/Mac/) && navigator.maxTouchPoints && navigator.maxTouchPoints > 2) {
-        check = true;
-      }
-    }
+          check=true;
+        }
+    } 
+
   })(navigator.userAgent || navigator.vendor || window.opera);
   return check;
 };
@@ -252,19 +253,19 @@ function handelTab1() {
   var selectedJob;
   var errors;
   if (who_you_are == "food") {
-    var arrFoods = [];
+    var arrFoods = ['A'];
     wya_foods.each(elm => {
       if (wya_foods[elm].name == "wya_food_other") {
         if (wya_food_order_input != "") {
-          arrFoods.push("food others - " + wya_food_order_input);
+          arrFoods.push("5 - " + wya_food_order_input);
         } else {
           errors = "Please input your answer “Others” (Please specify) textbox";
         }
       } else if (wya_foods[elm].name != "wya_food_order_input") {
-        arrFoods.push("food " + wya_foods[elm].value);
+        arrFoods.push(wya_foods[elm].value);
       }
     });
-    if (arrFoods.length > 0) selectedJob = arrFoods.join(" | ");
+    if (arrFoods.length > 0) selectedJob = arrFoods.join("");
   } else if (who_you_are == "others") {
     if (wya_order_input != "") {
       selectedJob = "others - " + wya_order_input;
@@ -277,6 +278,7 @@ function handelTab1() {
   }
   if (!selectedJob && !errors) errors = "Please select the options.";
   if (errors) return errors
+  console.log(selectedJob);
   gtag("set", "user_properties", {
     who_you_are: selectedJob,
   });
@@ -292,7 +294,7 @@ function handelTab2() {
   rfvs.each(elm => {
       if (rfvs[elm].name == "rfv_others") {
         if (rfv_others_input != "")
-          arrRfv.push("others - " + rfv_others_input);
+          arrRfv.push("I - " + rfv_others_input);
         else
           errors = "Please input your answer “Others” (Please specify) textbox";
       } else if (rfvs[elm].name != "rfv_others_input") {
@@ -301,6 +303,7 @@ function handelTab2() {
     });
   if (arrRfv.length == 0 && !errors) errors = "Please select the options.";
   if (errors) return errors
+  console.log(arrRfv.join("|"));
   gtag("event", "dipstick_survey_step2", {
     reason_for_visit: arrRfv.join(" | "),
   });
@@ -317,11 +320,12 @@ function handelTab3() {
   var arrRfv = [];
   var errors;
   if (completed_your_task == "Yes with some difficulty") {
+    arrRfv.push("Y");
     yes_challenges_faceds.each(elm => {
         if (yes_challenges_faceds[elm].name == "yes_challenges_faced_others") {
           if (yes_challenges_faced_others_input != "")
             arrRfv.push(
-              "others - " + yes_challenges_faced_others_input
+              "5 - " + yes_challenges_faced_others_input
             );
           else
             errors = "Please input your answer “Others” (Please specify) textbox";
@@ -329,13 +333,14 @@ function handelTab3() {
           arrRfv.push(yes_challenges_faceds[elm].value);
         }
       });
-    challenges_faced = arrRfv.join(" | ");
+    challenges_faced = arrRfv.join("");
   } else if (completed_your_task == "No") {
+    arrRfv.push("N");
     no_challenges_faceds.each(elm => {
         if (no_challenges_faceds[elm].name == "no_challenges_faced_others") {
           if (no_challenges_faced_others_input != "")
             arrRfv.push(
-              "others - " + no_challenges_faced_others_input
+              "6 - " + no_challenges_faced_others_input
             );
           else
             errors = "Please input your answer “Others” (Please specify) textbox";
@@ -343,7 +348,7 @@ function handelTab3() {
           arrRfv.push(no_challenges_faceds[elm].value);
         }
       });
-    challenges_faced = arrRfv.join(" | ");
+    challenges_faced = arrRfv.join("");
   }
 
   if (
@@ -356,6 +361,7 @@ function handelTab3() {
   if (errors) return errors
   var body = { completed_your_task }
   if (challenges_faced && challenges_faced != '') body.challenges_faced = challenges_faced;
+  console.log(body);
   gtag("event", "dipstick_survey_step3", body);
 }
 
@@ -407,7 +413,7 @@ function handelTab6() {
   if (sfa_name == '') return "Please enter your name.";
   if (sfa_email == '') return "Please enter your email.";
   if (!sfa_interviews && !sfa_prototype) return "Please select the options.";
-  if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(sfa_email)) return "Email invalid.";
+  if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(sfa_email)) return "Please enter a valid email address.";
 
   var random = (Math.random() + 1).toString(36).substring(7);
   var token = "token_" + random + "_" + new Date().getTime();
